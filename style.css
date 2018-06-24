@@ -1,0 +1,10 @@
+label {
+    width: 100px;
+    display: block;
+    float: left;
+    text-align: right;
+ }
+
+ input {
+     margin-bottom: 3px;
+ }

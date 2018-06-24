@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>fAkToR [Vue]</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="lib/vue.js"></script>
+    <script src="lib/axios.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h2 v-once>{{title}}</h2>
+        <hr>
+        <div>
+            <label for="xapikey">x-api-key:</label>
+            <input id="xapikey" type="text" size="50" v-model="params.xApiKey">
+        </div>
+        <div>
+            <label for="quizid">quiz Id:</label>
+            <input id="quizid" type="text" v-model="params.quizId">
+        </div>
+        <div>
+            <label for="progressid">progress Id:</label>
+            <input id="progressid" type="text" v-model="params.progressId">
+        </div>
+        <div>
+            <label for="sectionid">section Id:</label>
+            <input id="sectionid" type="text" v-model="params.sectionId">
+        </div>
+        <div>
+            Parameters:
+            <button type="button" @click="onSave">Save</button>
+            <button type="button" @click="onLoad">Load</button>
+        </div>
+        <hr>
+        Actions:
+        <button type="button" @click="onGetQuestions">Get Questions</button>
+        <span v-show="loadingQuestions">Loading...</span>
+        <button type="button" @click="onSend" :disabled="solver.quiz.questions.length === 0">Send One</button>
+        <button type="button" @click="onBegin" :disabled="solver.quiz.questions.length === 0">Begin</button>
+        <button type="button" @click="onStop">Stop</button>
+        <span v-show="loadingAnswers">Loading...</span>
+        <hr>
+        <h3>
+            Questions: {{ solver.quiz.questions.length }},
+            Passing: {{ solver.quiz.passingMark }},
+            Score {{ solver.assessment.score }},
+            Result: {{ solver.assessment.result }}
+        </h3>
+        <hr>
+        <h3>Generations: {{ solver.generations.length }}</h3>
+        <div v-for="(g, index) in solver.generations">
+            {{ index }}.)
+            score: {{ g.score + ' [' + g.result + ']' }},
+            Q: {{ g.questionIndex }} A: {{ g.answerIndex }}
+            {{ g.info }}
+        </div>
+        <hr>
+        <question
+            v-for="(q, index) in solver.quiz.questions"
+            :q="q"
+            :index="index"
+            :key="q.id">
+        </question>
+    </div>
+    <script src="question.component.js"></script>
+    <script src="api.js"></script>
+    <script src="solver.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
