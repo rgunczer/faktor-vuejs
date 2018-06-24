@@ -1,6 +1,6 @@
 'use strict';
 
-Vue.component('question', {
+Vue.component('question-item', {
     props: ['q', 'index'],
     template: `
 <div>

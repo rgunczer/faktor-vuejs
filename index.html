@@ -15,19 +15,19 @@
         <hr>
         <div>
             <label for="xapikey">x-api-key:</label>
-            <input id="xapikey" type="text" size="50" v-model="params.xApiKey">
+            <input id="xapikey" type="text" size="50" v-model.trim="params.xApiKey">
         </div>
         <div>
             <label for="quizid">quiz Id:</label>
-            <input id="quizid" type="text" v-model="params.quizId">
+            <input id="quizid" type="text" v-model.trim="params.quizId">
         </div>
         <div>
             <label for="progressid">progress Id:</label>
-            <input id="progressid" type="text" v-model="params.progressId">
+            <input id="progressid" type="text" v-model.trim="params.progressId">
         </div>
         <div>
             <label for="sectionid">section Id:</label>
-            <input id="sectionid" type="text" v-model="params.sectionId">
+            <input id="sectionid" type="text" v-model.trim="params.sectionId">
         </div>
         <div>
             Parameters:
@@ -58,14 +58,14 @@
             {{ g.info }}
         </div>
         <hr>
-        <question
+        <question-item
             v-for="(q, index) in solver.quiz.questions"
             :q="q"
             :index="index"
             :key="q.id">
-        </question>
+        </question-item>
     </div>
-    <script src="question.component.js"></script>
+    <script src="question-item-component.js"></script>
     <script src="api.js"></script>
     <script src="solver.js"></script>
     <script src="main.js"></script>
